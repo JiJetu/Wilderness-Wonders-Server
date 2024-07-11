@@ -30,26 +30,14 @@ const createProduct = async (req: Request, res: Response) => {
 // getting all product at a time
 const getAllProduct = async (req: Request, res: Response) => {
   try {
-    const query = req.query?.searchTerm as string | undefined;
-    const results = await ProductService.getAllProductFromDB();
-
-    // finding all searching or query data
-    if (query) {
-      const searchProduct = results.filter(
-        (result) =>
-          result.name.split(" ")[0].toLocaleLowerCase() ===
-          query.toLocaleLowerCase()
-      ); //getting all query search product data which are matched to the name of the product
-
-      // sending success message for getting search query product
-      if (searchProduct) {
-        return res.status(200).json({
-          success: true,
-          message: `Products matching search term ${query} fetched successfully!`,
-          data: searchProduct,
-        });
-      }
-    }
+    const { search, category, minPrice, maxPrice, sortOrder } = req.query;
+    const results = await ProductService.getAllProductFromDB(
+      search,
+      category,
+      minPrice,
+      maxPrice,
+      sortOrder
+    );
 
     // sending success message for getting all product
     res.status(200).json({

@@ -9,10 +9,34 @@ const createProductIntoDB = async (payload: TProduct) => {
   return result;
 };
 
-
 // getting product all data and search data from database
-const getAllProductFromDB = async () => {
-  const result = await Product.find();
+const getAllProductFromDB = async (
+  search: string,
+  category: string,
+  minPrice: string,
+  maxPrice: string,
+  sortOrder: "asc" | "desc"
+) => {
+  const query: Record<string, unknown> = {};
+  if (search) {
+    query.$or = [
+      { name: { $regex: search, $options: "i" } },
+      // { description: { $regex: search, $options: "i" } },
+    ];
+  }
+  if (category) {
+    query.category = category;
+  }
+  if (minPrice) {
+    query.price = { ...(query.price || {}), $gte: Number(minPrice) };
+  }
+  if (maxPrice) {
+    query.price = { ...(query.price || {}), $lte: Number(maxPrice) };
+  }
+
+  const sort = sortOrder === "desc" ? { price: -1 } : { price: 1 };
+
+  const result = await Product.find(query).sort(sort as any);
 
   return result;
 };
