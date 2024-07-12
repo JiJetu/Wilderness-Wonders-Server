@@ -34,9 +34,9 @@ const getAllProductFromDB = async (
     query.price = { ...(query.price || {}), $lte: Number(maxPrice) };
   }
 
-  const sort = sortOrder === "desc" ? { price: -1 } : { price: 1 };
+  const sort: any = sortOrder === "desc" ? { price: -1 } : { price: 1 };
 
-  const result = await Product.find(query).sort(sort as any);
+  const result = await Product.find(query).sort(sort);
 
   return result;
 };

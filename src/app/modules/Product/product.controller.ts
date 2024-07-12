@@ -6,6 +6,9 @@ import productValidationSchema from "./product.validation";
 const createProduct = async (req: Request, res: Response) => {
   try {
     const productData = req.body;
+    productData.price = Number(productData.price);
+    productData.ratting = Number(productData.ratting);
+    productData.stockQuantity = Number(productData.stockQuantity);
 
     // data validation using zod
     const zodProductParsedData = productValidationSchema.parse(productData);

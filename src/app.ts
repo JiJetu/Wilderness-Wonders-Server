@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 // for product api endPoints
-app.use("/api/products", ProductRoutes);
+app.use("/products", ProductRoutes);
 
 // // other route will hit here
 // app.use((req: Request, res: Response) => {

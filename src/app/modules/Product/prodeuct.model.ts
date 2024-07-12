@@ -7,8 +7,8 @@ const productSchema = new Schema<TProduct>({
   stockQuantity: { type: Number, required: true },
   description: { type: String, required: true },
   category: { type: String, required: true },
-  ratings: { type: Number, required: true },
-  images: { type: [String], required: true },
+  ratting: { type: Number, required: true },
+  images: { type: String, required: true },
 });
 
 export const Product = model<TProduct>("Product", productSchema);

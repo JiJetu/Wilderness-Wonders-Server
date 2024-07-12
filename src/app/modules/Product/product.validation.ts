@@ -6,8 +6,8 @@ const productValidationSchema = z.object({
   stockQuantity: z.number().int().nonnegative(),
   description: z.string(),
   category: z.string(),
-  ratings: z.number().min(0).max(5),
-  images: z.array(z.string().url()),
+  ratting: z.number().min(0).max(5),
+  images: z.string().url(),
 });
 
 export default productValidationSchema;
