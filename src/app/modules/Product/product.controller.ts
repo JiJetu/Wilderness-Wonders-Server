@@ -34,8 +34,9 @@ const createProduct = async (req: Request, res: Response) => {
 const getAllProduct = async (req: Request, res: Response) => {
   try {
     const { search, category, minPrice, maxPrice, sortOrder } = req.query;
+
     const results = await ProductService.getAllProductFromDB(
-      search,
+      search as string | "",
       category,
       minPrice,
       maxPrice,
