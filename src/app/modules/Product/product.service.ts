@@ -24,11 +24,7 @@ const getAllProductFromDB = async (query) => {
   if (category) {
     filter.category = category;
   }
-  if (minPrice !== undefined && maxPrice !== undefined) {
-    filter.price = { $gt: minPrice, $lte: maxPrice };
-  }
-
-  console.log(maxPrice);
+  filter.price = { $gte: minPrice, $lte: maxPrice };
 
   const result = await Product.find(filter).sort({
     price: sortOrder === "asc" ? 1 : -1,
