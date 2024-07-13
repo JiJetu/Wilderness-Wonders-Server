@@ -33,15 +33,7 @@ const createProduct = async (req: Request, res: Response) => {
 // getting all product at a time
 const getAllProduct = async (req: Request, res: Response) => {
   try {
-    const { search, category, minPrice, maxPrice, sortOrder } = req.query;
-
-    const results = await ProductService.getAllProductFromDB(
-      search as string | "",
-      category,
-      minPrice,
-      maxPrice,
-      sortOrder
-    );
+    const results = await ProductService.getAllProductFromDB(req.query);
 
     // sending success message for getting all product
     res.status(200).json({

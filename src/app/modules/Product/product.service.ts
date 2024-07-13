@@ -10,40 +10,36 @@ const createProductIntoDB = async (payload: TProduct) => {
 };
 
 // getting product all data and search data from database
-const getAllProductFromDB = async (
-  search: string,
-  category: string,
-  minPrice: string,
-  maxPrice: string,
-  sortOrder: "asc" | "desc"
-) => {
-  const query: Record<string, unknown> = {};
+const getAllProductFromDB = async (query) => {
+  const search = query.search || "";
+  const category = query.category || "";
+  const minPrice = parseFloat(query.minPrice) || 0;
+  const maxPrice = parseFloat(query.maxPrice) || 2000;
+  const sortOrder = query.sortOrder || "asc";
+
+  const filter: Record<string, unknown> = {};
   if (search) {
-    query.$or = [
-      { name: { $regex: search, $options: "i" } },
-      // { description: { $regex: search, $options: "i" } },
-    ];
+    filter.name = { $regex: search, $options: "i" };
   }
   if (category) {
-    query.category = category;
+    filter.category = category;
   }
-  if (minPrice) {
-    query.price = { ...(query.price || {}), $gte: Number(minPrice) };
-  }
-  if (maxPrice) {
-    query.price = { ...(query.price || {}), $lte: Number(maxPrice) };
+  if (minPrice !== undefined && maxPrice !== undefined) {
+    filter.price = { $gt: minPrice, $lte: maxPrice };
   }
 
-  const sort = sortOrder === "desc" ? { price: -1 } : { price: 1 };
+  console.log(maxPrice);
 
-  const result = await Product.find(query).sort(sort);
+  const result = await Product.find(filter).sort({
+    price: sortOrder === "asc" ? 1 : -1,
+  });
 
   return result;
 };
 
 // get a single product data from database
 const getSingleProductFromDB = async (id: string) => {
-  const result = await Product.findOne({ _id: id });
+  const result = await Product.findById(id);
 
   return result;
 };
