@@ -46,11 +46,7 @@ const updateProductIntoDB = async (
   payload: TProduct,
   condition: QueryOptions
 ) => {
-  const result = await Product.findOneAndUpdate(
-    { _id: id },
-    payload,
-    condition
-  );
+  const result = await Product.findByIdAndUpdate(id, payload, condition);
 
   return result;
 };
