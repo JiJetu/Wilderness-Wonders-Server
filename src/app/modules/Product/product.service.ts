@@ -1,6 +1,6 @@
 import { QueryOptions } from "mongoose";
 import { Product } from "./prodeuct.model";
-import { TProduct } from "./product.interface";
+import { TProduct, TQueryParams } from "./product.interface";
 
 // creating product data into database
 const createProductIntoDB = async (payload: TProduct) => {
@@ -10,11 +10,11 @@ const createProductIntoDB = async (payload: TProduct) => {
 };
 
 // getting product all data and search data from database
-const getAllProductFromDB = async (query) => {
+const getAllProductFromDB = async (query: TQueryParams) => {
   const search = query.search || "";
   const category = query.category || "";
-  const minPrice = parseFloat(query.minPrice) || 0;
-  const maxPrice = parseFloat(query.maxPrice) || 2000;
+  const minPrice = parseFloat(query.minPrice || "0");
+  const maxPrice = parseFloat(query.maxPrice || "2000");
   const sortOrder = query.sortOrder || "asc";
 
   const filter: Record<string, unknown> = {};
