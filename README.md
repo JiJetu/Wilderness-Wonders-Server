@@ -1,16 +1,16 @@
 <div align="center">
-  <h1>Wilderness Wonders Server</h1>
+  <h1>Campers Shop Server</h1>
 </div>
 
 ---
 
 ## Introduction
 
-Welcome to the Wilderness Wonders Server! This project serves as the backend for the Wilderness Wonders e-commerce website type of Campers shop, providing essential API endpoints and database connections for the application.
+Welcome to the Campers Shop Server! This project serves as the backend for the Campers Shop e-commerce website type of Campers shop, providing essential API endpoints and database connections for the application.
 
 ## Project Description
 
-The Wilderness Wonders Server is built to support the Wilderness Wonders e-commerce platform, specifically designed for camping enthusiasts. It handles various backend operations, including database interactions, API routing, and server-side logic.
+The Campers Shop Server is built to support the Campers Shop e-commerce platform, specifically designed for camping enthusiasts. It handles various backend operations, including database interactions, API routing, and server-side logic.
 
 ## Features
 
