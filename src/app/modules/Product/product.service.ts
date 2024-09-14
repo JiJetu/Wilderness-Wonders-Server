@@ -19,7 +19,10 @@ const getAllProductFromDB = async (query: TQueryParams) => {
 
   const filter: Record<string, unknown> = {};
   if (search) {
-    filter.name = { $regex: search, $options: "i" };
+    filter.$or = [
+      { name: { $regex: search, $options: "i" } },
+      { description: { $regex: search, $options: "i" } },
+    ];
   }
   if (category) {
     filter.category = category;
